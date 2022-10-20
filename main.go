@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"covid19-api/model"
-	"covid19-api/router"
+	"covid19-api/internal/model"
+	"covid19-api/internal/router"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -13,7 +13,7 @@ import (
 )
 
 func init() {
-	model.GetDataSource()
+	model.InitDataSource()
 }
 
 func main() {

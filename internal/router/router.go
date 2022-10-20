@@ -1,7 +1,7 @@
 package router
 
 import (
-	"covid19-api/handler"
+	"covid19-api/internal/handler"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

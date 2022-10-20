@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"covid19-api/model"
+	"covid19-api/internal/model"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
