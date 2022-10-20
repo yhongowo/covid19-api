@@ -12,7 +12,7 @@ var (
 	DB     *mongo.Database
 )
 
-func GetDataSource() {
+func InitDataSource() {
 	var err error
 	Client, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(config.MONGODB_URI))
 	if err != nil {
