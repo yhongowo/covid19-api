@@ -19,7 +19,7 @@ func NewOverallService(c *gin.Context) *OverallService {
 	return &OverallService{C: c, collection: model.DB.Collection("Overall")}
 }
 
-func (o *OverallService) GetLatest() (bson.M, error) {
+func (o *OverallService) GetLatestOverall() (bson.M, error) {
 	opts := options.Find().SetSort(bson.D{{"id", -1}}).SetLimit(1)
 	cursor, err := o.collection.Find(context.TODO(), bson.D{}, opts)
 	if err != nil {
@@ -30,4 +30,16 @@ func (o *OverallService) GetLatest() (bson.M, error) {
 		log.Fatal(err)
 	}
 	return results[0], nil
+}
+
+func (o *OverallService) ListOverall() ([]bson.M, error) {
+	cursor, err := o.collection.Find(context.TODO(), bson.D{})
+	if err != nil {
+		return nil, err
+	}
+	var results []bson.M
+	if err = cursor.All(context.TODO(), &results); err != nil {
+		log.Fatal(err)
+	}
+	return results, nil
 }

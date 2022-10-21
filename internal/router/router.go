@@ -17,32 +17,21 @@ func SetUp(r *gin.Engine) {
 
 	}
 
-	OverallApi := Api.Group("overall")
-	{
-		OverallApi.GET("", handler.GetOverall)
-		OverallApi.GET("list")
-	}
+	Api.GET("overall", handler.GetOverall)
+	Api.GET("overall/list", handler.ListOverall)
 
 	AreaApi := Api.Group("area")
 	{
-		AreaApi.GET("provinceName/list")
+		AreaApi.GET("abroad", handler.ListAbroad)
 
-		AreaApi.GET("province")
+		AreaApi.GET("provinceName", handler.ListProvinceName)
+		AreaApi.GET("provinceShortName", handler.ListProvinceShortName)
+		AreaApi.GET("province", handler.ListProvince)
 		AreaApi.GET("province/list")
 
 		AreaApi.GET("city")
 		AreaApi.GET("city/list")
 	}
 
-	AbroadApi := Api.Group("abroad")
-	{
-		AbroadApi.GET("")
-		AbroadApi.GET("list")
-	}
-
-	TimelineApi := Api.Group("timeline")
-	{
-		TimelineApi.GET("")
-		TimelineApi.GET("list")
-	}
+	Api.GET("timeline", handler.ListTimeline)
 }

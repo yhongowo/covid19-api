@@ -15,11 +15,11 @@ type AreaService struct {
 }
 
 func NewAreaService(c *gin.Context) *AreaService {
-	return &AreaService{C: c, collection: model.DB.Collection("")}
+	return &AreaService{C: c, collection: model.DB.Collection("Area")}
 }
 
 //获取最新所有省份，城市的数据
-func (o *AreaService) GetProvince() ([]bson.M, error) {
+func (o *AreaService) ListProvince() ([]bson.M, error) {
 	filter := bson.D{
 		{"updateTime", bson.D{{"$gte", util.TodayBeginTime()}}},
 	}
