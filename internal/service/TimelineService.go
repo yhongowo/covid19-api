@@ -18,7 +18,7 @@ func NewTimelineService(c *gin.Context) *TimelineService {
 	return &TimelineService{C: c, collection: model.DB.Collection("Timeline")}
 }
 
-//get latest data
+//获取最新新闻数据
 func (o *TimelineService) GetLatest() (result []bson.M, err error) {
 	filter := bson.D{
 		{"updateTime", bson.D{{"$gte", util.TodayBeginTime()}}},

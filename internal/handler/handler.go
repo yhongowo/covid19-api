@@ -10,7 +10,7 @@ import (
 
 func GetOverall(c *gin.Context) {
 	overallService := service.NewOverallService(c)
-	result, err := overallService.GetLatestOverall()
+	result, err := overallService.GetOverall()
 	if err != nil {
 		response.ErrorByCode(c, 200, err.Error())
 	}

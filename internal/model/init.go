@@ -2,7 +2,6 @@ package model
 
 import (
 	"context"
-	"covid19-api/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -12,11 +11,14 @@ var (
 	DB     *mongo.Database
 )
 
+const MONGODB_URI = ""
+const DATABASE_NAME = "2019-nCov"
+
 func InitDataSource() {
 	var err error
-	Client, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(config.MONGODB_URI))
+	Client, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(MONGODB_URI))
 	if err != nil {
 		panic(err)
 	}
-	DB = Client.Database(config.DATABASE_NAME)
+	DB = Client.Database(DATABASE_NAME)
 }
