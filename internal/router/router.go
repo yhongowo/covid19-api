@@ -2,13 +2,26 @@ package router
 
 import (
 	"covid19-api/internal/handler"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"time"
+
 	"net/http"
 )
 
 func SetUp(r *gin.Engine) {
 	r.Use(gin.Recovery())
-
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"Origin", "Content-Type"},
+		ExposeHeaders:    []string{"Content-Length", "Content-Type"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return true
+		},
+		MaxAge: 12 * time.Hour,
+	}))
 	Api := r.Group("api")
 	{
 		Api.GET("/", func(c *gin.Context) {

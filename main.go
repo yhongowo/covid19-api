@@ -18,6 +18,7 @@ func init() {
 
 func main() {
 	r := gin.Default()
+
 	router.SetUp(r)
 
 	srv := &http.Server{
