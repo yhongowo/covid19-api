@@ -21,7 +21,7 @@ func NewOverallService(c *gin.Context) *OverallService {
 
 //获取最新overall信息
 func (o *OverallService) GetOverall() (bson.M, error) {
-	opts := options.Find().SetSort(bson.D{{"id", -1}}).SetLimit(1)
+	opts := options.Find().SetLimit(1)
 	cursor, err := o.collection.Find(context.TODO(), bson.D{}, opts)
 	if err != nil {
 		return nil, err
@@ -34,7 +34,17 @@ func (o *OverallService) GetOverall() (bson.M, error) {
 }
 
 func (o *OverallService) ListOverall() ([]bson.M, error) {
-	cursor, err := o.collection.Find(context.TODO(), bson.D{})
+	projectStage := bson.D{{"$project", bson.D{
+		{"currentConfirmedCount", 1},
+		{"ConfirmedCount", 1},
+		{"yesterdayConfirmedCountIncr", 1},
+		{"updateTime", 1},
+		{"globalStatistics", 1},
+	}}}
+	limitStage := bson.D{{"$limit", 365}}
+	sortStage := bson.D{{"$sort", bson.D{{"_id", -1}}}}
+
+	cursor, err := o.collection.Aggregate(context.TODO(), mongo.Pipeline{limitStage, projectStage, sortStage})
 	if err != nil {
 		return nil, err
 	}

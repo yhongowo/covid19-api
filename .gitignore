@@ -16,3 +16,4 @@
 
 #Config
 config.go
+!/bin/go_build_covid19_api_linux
