@@ -33,6 +33,7 @@ func ListProvince(c *gin.Context) {
 	result, err := provinceService.ListProvince()
 	if err != nil {
 		response.ErrorByCode(c, 200, err.Error())
+		return
 	}
 	response.Success(c, result)
 }
